@@ -1,5 +1,7 @@
 package com.mikky.app.rest.application;
 
+import com.mikky.app.rest.application.request.UserBalanceRequest;
+import com.mikky.app.rest.application.response.UserBalanceResponse;
 import com.mikky.app.rest.domain.models.UserBalance;
 import com.mikky.app.rest.domain.services.UserBalanceService;
 import org.springframework.web.bind.annotation.*;
@@ -17,24 +19,24 @@ public class UserBalanceController {
     }
 
     @GetMapping("")
-    public List<UserBalance> getAllUserBalance() {
+    public List<UserBalanceResponse> getAllUserBalance() {
 
         return userBalanceService.getAllUserBalance();
     }
 
     @GetMapping("/{balanceId}")
-    public UserBalance getUserBalance(@PathVariable Long balanceId) {
+    public UserBalanceResponse getUserBalance(@PathVariable Long balanceId) {
         return userBalanceService.getUserBalance(balanceId);
     }
 
     @PostMapping("")
-    public String addUserBalance(@RequestBody UserBalance userBalance) {
-        return userBalanceService.addUserBalance(userBalance);
+    public String addUserBalance(@RequestBody UserBalanceRequest userBalanceRequest) {
+        return userBalanceService.addUserBalance(userBalanceRequest);
     }
 
     @PutMapping("")
     public String updateUserBalance(@RequestHeader("balance-id") Long balanceId,
-                                    @RequestBody UserBalance userBalanceRequest) {
+                                    @RequestBody UserBalanceRequest userBalanceRequest) {
 
         return userBalanceService.updateUserBalance(balanceId, userBalanceRequest);
     }
